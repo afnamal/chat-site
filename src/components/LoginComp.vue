@@ -5,6 +5,7 @@
           <input type="email" v-model="email" placeholder="email giriniz" required>
           <input type="password" v-model="password" placeholder="şifre giriniz" >
           <p class="error" v-if="error">{{ error }}</p>
+          <p v-if="dogrulanmamis" class="error">{{ dogrulanmamis }}</p>
           <button>Giriş Yap</button>
       </form>
   </div>
@@ -14,6 +15,7 @@
 import LoginComposable from '../composables/LoginComposable'
 import { ref } from "vue";
 import { useRouter } from 'vue-router';
+import { getAuth, sendEmailVerification } from "firebase/auth";
 
 export default {
 setup() {
@@ -22,20 +24,41 @@ setup() {
   const name = ref('');
   const { error, login } = LoginComposable();
   const router= useRouter()
+  const dogrulanmamis=ref(null)
   const handleSubmit = async () => {
+  try {
+    // Kullanıcı girişi yap
     await login(email.value, password.value);
-    console.log('giriş başarılı');
-    if (!error.value) {
-      pushChat()
+    
+    // Aktif kullanıcıyı al
+    const user = getAuth().currentUser;
+    
+    console.log('Giriş başarılı');
+    
+    // Eğer kullanıcı doğrulanmamışsa
+    if (user && !user.emailVerified) {
+      // E-posta doğrulama e-postası gönder
+      await sendEmailVerification(user);
+      dogrulanmamis.value='lütfen hesabınızı doğrulayınız'
     }
-   };
+    
+    // Eğer bir hata yoksa ve kullanıcı doğrulanmışsa, chat sayfasına yönlendir
+    if (!error.value && user && user.emailVerified) {
+      pushChat();
+    }
+  } catch (error) {
+    // Hata durumunda hatayı konsola yazdır
+    console.error('Hata:', error.message);
+  }
+};
+
    const pushChat=()=>{
     router.push('/chat')
    }
 
 
 
-  return { password, email, name, handleSubmit, error };
+  return { password, email, name, handleSubmit, error,dogrulanmamis };
 }
 }
 </script>

@@ -27,8 +27,9 @@ export default {
                     message: message.value,
                     createTime: serverTimestamp()
                 };
-                if(chat.message)
+                if(chat.message){
                   addDocuman(chat)
+                }
                 
                 message.value = ''; // Clear message after submission
                 error.value = null; // Clear any previous errors
