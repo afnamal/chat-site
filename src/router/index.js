@@ -8,7 +8,17 @@ const routes = [
   {
     path: '/',
     name: 'welcomeView',
-    component: welcomeView // Değişiklik yapıldı
+    component: welcomeView, // Değişiklik yapıldı
+    beforeEnter: (to, from, next) => {
+      const user =projectAuth.currentUser
+      if(user){
+        next({name:'ChatRoom'})
+      }
+      else{
+        next()
+      }
+    }
+    
   },
   {
     path: '/chat',
