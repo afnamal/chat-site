@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>Chat Room</p>
     <NavbarComp/>
     <ChatWindow/>
     <ChatForm/>

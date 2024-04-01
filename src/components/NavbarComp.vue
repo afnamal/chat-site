@@ -1,11 +1,11 @@
 <template>
     <nav v-if="user">
         <div >
-    <p>Hi {{ user.displayName }}</p>
-    <p class="email">Currently logged in ass {{ user.email }}</p>
+    <p>Merhaba {{ user.displayName }}</p>
+    <p class="email">{{ user.email }} ile giriş yapıldı</p>
     
         </div >   
-        <button class="pointer" @click="handleClick">Logout</button>
+        <button class="pointer" @click="handleClick">Çıkış Yap</button>
         <p v-if="error">{{ error }}</p>
    </nav>
 </template>

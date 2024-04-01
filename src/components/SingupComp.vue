@@ -1,13 +1,13 @@
 // SignupComp.vue
 <template>
   <div>
-    <p>Signup</p>
+    <p>Üye Ol</p>
     <form @submit.prevent="handleSubmit">
         <input type="text" placeholder="isim giriniz" required v-model="name">
         <input type="email" v-model="email" placeholder="email giriniz" required>
         <input type="password" v-model="password" placeholder="şifre giriniz" required>
         <p v-if="error" class="error">{{ error }}</p>
-        <button type="submit">signup</button>
+        <button type="submit">Üye Ol</button>
     </form>
   </div>
 </template>

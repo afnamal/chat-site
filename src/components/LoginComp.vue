@@ -1,11 +1,11 @@
 <template>
   <div>
-      <p>Login</p>
+      <p>Giriş Yap</p>
       <form @submit.prevent="handleSubmit">
           <input type="email" v-model="email" placeholder="email giriniz" required>
           <input type="password" v-model="password" placeholder="şifre giriniz" >
           <p class="error" v-if="error">{{ error }}</p>
-          <button>Login</button>
+          <button>Giriş Yap</button>
       </form>
   </div>
 </template>

@@ -17,6 +17,7 @@ import { collection, onSnapshot, orderBy } from "firebase/firestore"; // onSnaps
 import { formatDistanceToNow } from 'date-fns'
 import { computed } from "vue";
 import { query } from "firebase/firestore";
+import trLocale from 'date-fns/locale/tr'; 
 
 export default {
   setup() {
@@ -24,7 +25,7 @@ export default {
   const formatedDocuments = computed(() => {
     if (documents.value) {
       return documents.value.map((doc) => {
-        let time = formatDistanceToNow(doc.createTime.toDate());
+        let time = formatDistanceToNow(doc.createTime.toDate(), {locale:trLocale});
         return { ...doc, createTime: time };
       });
     } else {
@@ -32,9 +33,7 @@ export default {
     }
   });
 
-  // Koleksiyon verilerini alma fonksiyonu
-  // Koleksiyon verilerini alma fonksiyonu
-  // Koleksiyon verilerini alma fonksiyonu
+
 const getCollection = (collectionName) => {
   const collectionRef = collection(projectFirestore, collectionName);
   const q = query(collectionRef, orderBy("createTime"));

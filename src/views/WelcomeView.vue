@@ -1,12 +1,13 @@
 <template>
   <div class="welcome container">
+
     <div v-if="!Login">
       <SingupComp />
-      <p>Already have an Account? <span @click="Login=!Login">Login</span> </p>
+      <p>Zaten Hesabım var <span @click="Login=!Login">Giriş Yap</span> </p>
     </div>
     <div v-else>
       <LoginComp ></LoginComp>
-      <p>Don't you have an Account? <span @click="Login=!Login">Signup</span> </p>
+      <p>Hesabım Yok <span @click="Login=!Login">Üye Ol</span> </p>
     </div>
   </div>
 </template>

@@ -9,15 +9,7 @@ const routes = [
     path: '/',
     name: 'welcomeView',
     component: welcomeView, // Değişiklik yapıldı
-    beforeEnter: (to, from, next) => {
-      const user =projectAuth.currentUser
-      if(user){
-        next({name:'ChatRoom'})
-      }
-      else{
-        next()
-      }
-    }
+    
     
   },
   {
@@ -36,6 +28,13 @@ const routes = [
         next()
       }
     }
+    
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    
     
   }
 ]
