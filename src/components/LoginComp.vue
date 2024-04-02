@@ -38,8 +38,8 @@ setup() {
     // Eğer kullanıcı doğrulanmamışsa
     if (user && !user.emailVerified) {
       // E-posta doğrulama e-postası gönder
-      await sendEmailVerification(user);
       dogrulanmamis.value='lütfen hesabınızı doğrulayınız'
+      await sendEmailVerification(user);
     }
     
     // Eğer bir hata yoksa ve kullanıcı doğrulanmışsa, chat sayfasına yönlendir

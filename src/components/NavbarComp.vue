@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 nav {
   width: 80%;
   padding: 20px;
@@ -86,6 +86,9 @@ nav p.email {
 .profil {
   max-width: 50px;
   
+}
+.pointer{
+  background-color: rgb(215, 0, 0);
 }
 
 </style>
