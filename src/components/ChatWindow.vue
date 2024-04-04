@@ -19,7 +19,7 @@ import { ref, computed, onUpdated } from "vue";
 
 import { formatDistanceToNow } from 'date-fns'
 import trLocale from 'date-fns/locale/tr'; 
-import GetCollection from '../composables/GetCollection'
+import GetCollection from '../composables/GetCollectionDemo'
 
 export default {
   setup() {
@@ -80,3 +80,4 @@ export default {
   border-radius: 30%;
 }
 </style>
+../composables/GetCollectionDemo
