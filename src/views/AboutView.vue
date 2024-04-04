@@ -1,13 +1,13 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <NavbarOrg/>
   </div>
 </template>
 
 <script>
-
+import NavbarOrg from '../components/NavbarOrg.vue'
 export default {
-  components: {
+  components: {NavbarOrg
   }
 }
 </script>

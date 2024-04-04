@@ -14,35 +14,19 @@ import GetUser from '../composables/GetUser'
 import { ref } from 'vue';
 import { serverTimestamp } from '../firebase'
 import UseCollection from '../composables/UseCollection'
-import { getAuth } from 'firebase/auth';
-
+import GetUserPhoto from '../composables/GetUserPhoto'
 export default {
   setup() {
     const { user } = GetUser();
     const message = ref('');
     const error = ref(null); // Hata referansını tanımlayın
     const { addDocuman } = UseCollection('messages');
+    const {photoURL}= GetUserPhoto()
 
-    const getUserPhotoURL = async () => {
-      const auth = getAuth();
-      try {
-        const userCredential = auth.currentUser;
-        if (userCredential) {
-          const photoURL = userCredential.photoURL;
-          return photoURL; // Kullanıcının fotoğraf URL'sini döndürün
-        } else {
-          console.error('Kullanıcı bulunamadı.');
-          return null;
-        }
-      } catch (error) {
-        console.error('Kullanıcı belgesi alınırken bir hata oluştu:', error);
-        return null;
-      }
-    };
+    
 
     const handleSubmit = async () => {
       try {
-        const photoURL = await getUserPhotoURL(); // Beklenen işlem sonucunu alın
         const chat = {
           displayName: user.value.displayName,
           message: message.value,

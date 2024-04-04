@@ -1,28 +1,29 @@
 import { ref } from "vue";
 import { projectFirestore } from "../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
-const getCollection = (collectionName) => {
-  const documents = ref(null);
-  const error = ref(null);
+const documents = ref(null);
+const error = ref(null);
 
-  let collectionRef = collection(projectFirestore, collectionName);
+const GetCollection = (collectionName) => {
+  const collectionRef = collection(projectFirestore, collectionName);
+  const q = query(collectionRef, orderBy("createTime"));
 
-  // collectionRef üzerinde onSnapshot fonksiyonunu kullanarak verileri dinleyin
-  onSnapshot(collectionRef, (snap) => {
+  onSnapshot(q, (snap) => {
     let result = [];
     snap.docs.forEach((doc) => {
-      doc.data().createdAt && result.push({ ...doc.data(), id: doc.id });
+      doc.data().createTime && result.push({ ...doc.data(), id: doc.id });
     });
     documents.value = result;
-    error.value = null;
+    error.value = null; // Hata olmadığında error değerini sıfırla
   }, (err) => {
     console.log(err.message);
     documents.value = null;
     error.value = "Veriler getirilemedi.";
   });
 
+  // documents ve error değişkenlerini döndür
   return { documents, error };
 };
 
-export default getCollection;
+export default GetCollection;

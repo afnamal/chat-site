@@ -1,7 +1,14 @@
 <template>
   <nav v-if="user">
-    <input type="file" accept="image/*" @change="handleFileChange" v-if="!user.photoURL">
-    <div>
+    <!-- Değiştirilmiş input alanı -->
+    <label for="file-upload">
+      <img :src=user.photoURL alt="Profil Fotoğrafı" class="profil" @click="triggerFileInput" v-if="user.photoURL">
+      <img src="../assets/logo.png" alt="Profil Fotoğrafı" class="profil" @click="triggerFileInput" v-else>
+
+    </label>
+    <input id="file-upload" type="file" accept="image/*" style="display: none" @change="handleFileChange" >
+
+    <div class="hiuser">
       <p>Merhaba {{ user.displayName }}</p>
       <p class="email">{{ user.email }} ile giriş yapıldı</p>
     </div>   
@@ -54,14 +61,19 @@ export default {
       }
     }
 
-    return { error, handleClick, user, handleFileChange };
+    // Dosya seçme işlemini tetiklemek için
+    const triggerFileInput = () => {
+      document.getElementById('file-upload').click();
+    }
+
+    return { error, handleClick, user, handleFileChange, triggerFileInput };
   }
 }
 </script>
 
 <style scoped>
 nav {
-  width: 80%;
+  width: 90%;
   padding: 20px;
   padding-left: 40px;
   padding-right: 40px;
@@ -85,10 +97,14 @@ nav p.email {
 }
 .profil {
   max-width: 50px;
-  
+  cursor: pointer;
+  border-radius: 40%;
+  margin-left: -30px;
 }
-.pointer{
+.pointer {
   background-color: rgb(215, 0, 0);
 }
-
+.hiuser{
+  margin-left: 20px;
+}
 </style>

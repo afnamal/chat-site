@@ -1,12 +1,18 @@
 <template>
+  <div>
   <nav class="main-nav">
-    <router-link :to="{ name: 'welcomeView' }">Projects</router-link>
-    <router-link :to="{ name: 'about' }">Add New Project</router-link>
+    <router-link :to="{ name: 'welcomeView' }">Anasayfa</router-link>
+    <router-link :to="{ name: 'about' }">Hakkında</router-link>
+    <router-link :to="{ name: 'WelcomeSec' }">Giriş Yap</router-link>
+
   </nav>
+</div>
 </template>
 
 <script>
-export default {};
+export default {
+  
+};
 </script>
 
 <style>
@@ -25,5 +31,8 @@ a.router-link-active {
   border-bottom: 2px solid #76dd78;
   padding-bottom: 4px;
   color: #76dd78;
+}
+div{
+justify-content: space-between;
 }
 </style>

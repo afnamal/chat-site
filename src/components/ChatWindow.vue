@@ -8,6 +8,7 @@
           <span>{{ doc.displayName }}</span>
         </span>
         <span class="message">{{ doc.message }}</span>
+        <span v-if="error">{{ error }}</span>
       </div>
     </div>
   </div>
@@ -15,14 +16,14 @@
 
 <script>
 import { ref, computed, onUpdated } from "vue";
-import { projectFirestore } from "../firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+
 import { formatDistanceToNow } from 'date-fns'
 import trLocale from 'date-fns/locale/tr'; 
+import GetCollection from '../composables/GetCollection'
 
 export default {
   setup() {
-    const documents = ref(null);
+    const {documents, error}= GetCollection('messages')
     const formatedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.map((doc) => {
@@ -34,20 +35,8 @@ export default {
       }
     });
 
-    const getCollection = (collectionName) => {
-      const collectionRef = collection(projectFirestore, collectionName);
-      const q = query(collectionRef, orderBy("createTime"));
+    
 
-      onSnapshot(q, (snap) => {
-        let result = [];
-        snap.docs.forEach((doc) => {
-          doc.data().createTime && result.push({ ...doc.data(), id: doc.id});
-        });
-        documents.value = result;
-      });
-    };
-
-    getCollection('messages');
     const messagebox = ref(null);
 
     onUpdated(() => {
@@ -57,7 +46,7 @@ export default {
    
     
 
-    return { documents, formatedDocuments, messagebox };
+    return { documents, formatedDocuments, messagebox,error };
   },
 };
 </script>
