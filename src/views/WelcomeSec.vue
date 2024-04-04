@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <NavbarOrg/>
+  
     <div class="welcome container">
       <div v-if="!Login">
         <SingupComp />
@@ -11,7 +10,7 @@
         <p>Hesabım Yok <span @click="Login=!Login">Üye Ol</span> </p>
       </div>
     </div>
-  </div>
+
   </template>
   
   <script>
