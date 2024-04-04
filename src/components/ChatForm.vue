@@ -14,37 +14,57 @@ import GetUser from '../composables/GetUser'
 import { ref } from 'vue';
 import { serverTimestamp } from '../firebase'
 import UseCollection from '../composables/UseCollection'
-import GetUserPhoto from '../composables/GetUserPhoto'
+import { getAuth } from 'firebase/auth';
 export default {
   setup() {
     const { user } = GetUser();
     const message = ref('');
     const error = ref(null); // Hata referansını tanımlayın
     const { addDocuman } = UseCollection('messages');
-    const {photoURL}= GetUserPhoto()
+    
+    const GetUserPhoto = async () => {
+    const auth = getAuth();
+    try {
+      const userCredential = auth.currentUser;
+      if (userCredential) {
+        const photoURL = userCredential.photoURL;
+        return photoURL; // Kullanıcının fotoğraf URL'sini döndürün
+      } else {
+        console.error('Kullanıcı bulunamadı.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Kullanıcı belgesi alınırken bir hata oluştu:', error);
+      return null;
+    }
+  };
 
     
 
-    const handleSubmit = async () => {
-      try {
-        const chat = {
-          displayName: user.value.displayName,
-          message: message.value,
-          createTime: serverTimestamp(),
-          photoURL: photoURL // getUserPhotoURL işlevinden alınan fotoğraf URL'si
-        };
-        if (chat.message) {
-          addDocuman(chat)
-        }
+  const handleSubmit = async () => {
+  try {
+    const photoURL = await GetUserPhoto(); // GetUserPhoto fonksiyonunu çağırarak photoURL değerini alın
 
-        message.value = ''; // Gönderimden sonra mesajı temizleyin
-        error.value = null; // Önceki hataları temizleyin
-        console.log(chat);
-      } catch (err) {
-        console.error('Error adding document: ', err);
-        error.value = 'Failed to send message. Please try again.'; // Hata mesajını ayarlayın
-      }
+    const chat = {
+      displayName: user.value.displayName,
+      message: message.value,
+      createTime: serverTimestamp(),
+      photoURL: photoURL // photoURL değerini kullanarak chat objesini oluşturun
     };
+
+    if (chat.message) {
+      addDocuman(chat);
+    }
+
+    message.value = ''; // Gönderimden sonra mesajı temizleyin
+    error.value = null; // Önceki hataları temizleyin
+    console.log(chat);
+  } catch (err) {
+    console.error('Error adding document: ', err);
+    error.value = 'Failed to send message. Please try again.'; // Hata mesajını ayarlayın
+  }
+};
+
 
     return { handleSubmit, message, error };
   }
