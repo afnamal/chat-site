@@ -19,11 +19,11 @@ import { ref, computed, onUpdated } from "vue";
 
 import { formatDistanceToNow } from 'date-fns'
 import trLocale from 'date-fns/locale/tr'; 
-import GetCollection from '../composables/GetCollectionDemo'
+import GetCollectionDemo from '../composables/GetCollectionDemo'
 
 export default {
   setup() {
-    const {documents, error}= GetCollection('messages')
+    const {documents, error}= GetCollectionDemo('messages')
     const formatedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.map((doc) => {

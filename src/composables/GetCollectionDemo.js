@@ -5,7 +5,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 const documents = ref(null);
 const error = ref(null);
 
-const GetCollection = (collectionName) => {
+const GetCollectionDemo = (collectionName) => {
   const collectionRef = collection(projectFirestore, collectionName);
   const q = query(collectionRef, orderBy("createTime"));
 
@@ -26,4 +26,4 @@ const GetCollection = (collectionName) => {
   return { documents, error };
 };
 
-export default GetCollection;
+export default GetCollectionDemo;
