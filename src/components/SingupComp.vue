@@ -7,6 +7,7 @@
         <input type="email" v-model="email" placeholder="email giriniz" required>
         <input type="password" v-model="password" placeholder="şifre giriniz" required>
         <p v-if="error" class="error">{{ error }}</p>
+        <p v-if="OnayMaili" class="error">{{ OnayMaili }}</p>
         <button type="submit">Üye Ol</button>
     </form>
   </div>
@@ -17,27 +18,28 @@ import SignupComposable from'../composables/SignupComposable'
 import { useRouter } from 'vue-router';
 import { ref } from "vue";
 
+
 export default {
   setup() {
     const password = ref('');
     const email = ref('');
     const name = ref('');
-    const {error,user}=SignupComposable()
+    const {error,user,OnayMaili}=SignupComposable()
     const router=useRouter()
     const pushchat=()=>{
       router.push('/chat')
     }
     const handleSubmit = async () => {
-      await user(email.value,password.value,name.value)
-      
-      if (!error.value ||error.value==='') {  
-        pushchat()
-        
-      }
-    }
+  await user(email.value, password.value, name.value);
+  
+  if (!error.value || error.value === '') {  
+    pushchat();
+  }
+};
+
    
 
-    return { password, email, name, handleSubmit,error }
+    return { password, email, name, handleSubmit,error,OnayMaili }
   }
 }
 </script>

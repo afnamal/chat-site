@@ -1,10 +1,8 @@
 <template>
   <div>
   <nav class="main-nav">
-    <router-link :to="{ name: 'welcomeView' }">Anasayfa</router-link>
+    <router-link :to="{ name: 'welcomeView' }">Giriş Yap</router-link>
     <router-link :to="{ name: 'about' }">Hakkında</router-link>
-    <router-link :to="{ name: 'WelcomeSec' }">Giriş Yap</router-link>
-
   </nav>
 </div>
 </template>
