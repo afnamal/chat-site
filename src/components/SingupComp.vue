@@ -7,7 +7,6 @@
         <input type="email" v-model="email" placeholder="email giriniz" required>
         <input type="password" v-model="password" placeholder="şifre giriniz" required>
         <p v-if="error" class="error">{{ error }}</p>
-        <p v-if="OnayMaili" class="error">{{ OnayMaili }}</p>
         <button type="submit">Üye Ol</button>
     </form>
   </div>
@@ -24,7 +23,7 @@ export default {
     const password = ref('');
     const email = ref('');
     const name = ref('');
-    const {error,user,OnayMaili}=SignupComposable()
+    const {error,user}=SignupComposable()
     const router=useRouter()
     const pushchat=()=>{
       router.push('/chat')
@@ -39,7 +38,7 @@ export default {
 
    
 
-    return { password, email, name, handleSubmit,error,OnayMaili }
+    return { password, email, name, handleSubmit,error }
   }
 }
 </script>

@@ -6,6 +6,8 @@
           <input type="password" v-model="password" placeholder="şifre giriniz" >
           <p class="error" v-if="error">{{ error }}</p>
           <p v-if="dogrulanmamis" class="error">{{ dogrulanmamis }}</p>
+          <p v-if="OnayMaili" class="error">{{ OnayMaili }}</p>
+
           <button>Giriş Yap</button>
       </form>
   </div>
@@ -16,9 +18,13 @@ import LoginComposable from '../composables/LoginComposable'
 import { ref } from "vue";
 import { useRouter } from 'vue-router';
 import { getAuth, sendEmailVerification } from "firebase/auth";
+import SignupComposable from'../composables/SignupComposable'
+
 
 export default {
 setup() {
+  const {OnayMaili}=SignupComposable()
+
   const password = ref('');
   const email = ref('');
   const name = ref('');
@@ -58,7 +64,7 @@ setup() {
 
 
 
-  return { password, email, name, handleSubmit, error,dogrulanmamis };
+  return { password, email, name, handleSubmit, error,dogrulanmamis,OnayMaili };
 }
 }
 </script>

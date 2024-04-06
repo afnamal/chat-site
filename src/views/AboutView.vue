@@ -6,10 +6,7 @@
       <h2 class="section-title">Üyelik İşlemleri</h2>
       <p class="section-content">Kullanıcılar, siteye erişmek ve kullanmak için öncelikle üye olmalıdır. Üyelik işlemleri, Firebase Authentication (Auth) aracılığıyla gerçekleştirilir ve kullanıcıların giriş yapabilmeleri için e-posta doğrulaması gerekmektedir.</p>
     </div>
-    <div class="section">
-      <h2 class="section-title">Profil Fotoğrafı</h2>
-      <p class="section-content">Profil fotoğrafı eklemek isteyen kullanıcılar, sayfanın sol üst köşesinde bulunan bölüme tıklayarak bu işlemi gerçekleştirebilirler. Profil fotoğrafları Firebase Storage'da tutulmaktadır ve kullanıcının fotoğrafına erişim, userphotoURL aracılığıyla sağlanmaktadır.</p>
-    </div>
+    
     <div class="section">
       <h2 class="section-title">Proje Amaçları</h2>
       <p class="section-content">Bu proje tamamen geliştirme ve deneme amaçlı olup, herhangi bir maddi beklenti içermemektedir. Amacı, Vue.js ve Firebase gibi teknolojileri kullanarak interaktif bir mesajlaşma platformu oluşturma sürecinde deneyim kazanmaktır.</p>

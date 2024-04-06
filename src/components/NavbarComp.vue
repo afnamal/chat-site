@@ -3,7 +3,7 @@
     <!-- Değiştirilmiş input alanı -->
     <label for="file-upload">
       <img :src=user.photoURL alt="Profil Fotoğrafı" class="profil" @click="triggerFileInput" v-if="user.photoURL">
-      <img src="../assets/logo.png" alt="Profil Fotoğrafı" class="profil" @click="triggerFileInput" v-else>
+      <img src="../assets/defaultpp1.jpg" alt="Profil Fotoğrafı" class="profil" @click="triggerFileInput" v-else>
 
     </label>
     <input id="file-upload" type="file" accept="image/*" style="display: none" @change="handleFileChange" >
