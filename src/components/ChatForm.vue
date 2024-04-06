@@ -1,10 +1,14 @@
 <template>
   <form>
-    <textarea 
-        @keypress.enter.prevent="handleSubmit" 
-        placeholder="Mesajınızı Buraya Yazınız..."
-        v-model="message"
-    ></textarea>
+    <div class="input-container">
+      <textarea 
+          @keypress.enter.prevent="handleSubmit" 
+          placeholder="Mesajınızı Buraya Yazınız..."
+          v-model="message"
+      ></textarea>
+      <span class="material-icons" @click="handleSubmit">send</span>
+
+    </div>
     <div v-if="error">{{ error }}</div>
   </form>
 </template>
@@ -75,7 +79,13 @@ export default {
 form {
   margin: 10px;
 }
+.input-container {
+  display: flex;
+  align-items: center;
+}
 textarea {
+  flex: 1; /* textarea'nın genişliği esnek olacak şekilde ayarlanır */
+  margin-left: 10px; /* ikon ile textarea arasına boşluk ekler */
   width: 100%;
   max-width: 100%;
   margin-bottom: 10px;
@@ -85,5 +95,10 @@ textarea {
   border-radius: 20px;
   font-family: inherit;
   outline: none;
+}
+.material-icons {
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: 10px
 }
 </style>
