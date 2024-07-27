@@ -7,9 +7,6 @@ Features
     User-Friendly Interface: Simple and effective UI for easy use.
     Lightweight and Fast: Smooth experience powered by Vue.js.
 
-Try It Out
-
-You can try out the project at Chat-Site.
 Installation
 
 To run the project locally, follow these steps:
@@ -18,7 +15,7 @@ To run the project locally, follow these steps:
 
     bash
 
-git clone https://github.com/your-username/chat-site.git
+git clone https://github.com/afnamal/chat-site.git
 
 Navigate to the project directory:
 
